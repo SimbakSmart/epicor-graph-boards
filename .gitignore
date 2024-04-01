@@ -396,3 +396,8 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+Epicor/.vs
+Epicor/Epicor.App/bin
+Epicor/Epicor.App/obj
+

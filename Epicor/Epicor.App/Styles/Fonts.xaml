@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+
+    <!--Font Files-->
+    <FontFamily x:Key="AntonRegular">pack://appliction;,,,/Fonts/#Anton Regular</FontFamily>
+    <FontFamily x:Key="ArchivoBlackRegular">pack://appliction;,,,/Fonts/#ArchivoBlack Regular</FontFamily>
+
+
+    <!--Font Size-->
+    <system:Double x:Key="FontSizeExtraLarge">24</system:Double>
+    <system:Double x:Key="FontSizeLarge">18</system:Double>
+    <system:Double x:Key="FontSizeRegular">12</system:Double>
+    <system:Double x:Key="FontSizeSmall">10</system:Double>
+    <system:Double x:Key="FontSizeExtraSmall">8</system:Double>
+
+    <!--TitleTextExtraLarge-->
+    <Style TargetType="{x:Type TextBlock}" x:Key="TitleExtraLargeTextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource AntonRegular}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeExtraLarge}" />
+    </Style>
+
+
+</ResourceDictionary>
