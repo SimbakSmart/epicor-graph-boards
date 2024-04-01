@@ -5,6 +5,10 @@ VisualStudioVersion = 17.9.34714.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epicor.App", "Epicor.App\Epicor.App.csproj", "{3B90AA8F-8832-487D-B501-DB404C425F65}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epicor.Core", "Epicor.Core\Epicor.Core.csproj", "{706EA72B-31A6-474E-9935-ADCDBB28BF0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epicor.Infraestructure", "Epicor.Infraestructure\Epicor.Infraestructure.csproj", "{ED56DED0-5D15-44B1-969F-47DF1F14CD85}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{3B90AA8F-8832-487D-B501-DB404C425F65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B90AA8F-8832-487D-B501-DB404C425F65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B90AA8F-8832-487D-B501-DB404C425F65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{706EA72B-31A6-474E-9935-ADCDBB28BF0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{706EA72B-31A6-474E-9935-ADCDBB28BF0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{706EA72B-31A6-474E-9935-ADCDBB28BF0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{706EA72B-31A6-474E-9935-ADCDBB28BF0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED56DED0-5D15-44B1-969F-47DF1F14CD85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED56DED0-5D15-44B1-969F-47DF1F14CD85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED56DED0-5D15-44B1-969F-47DF1F14CD85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED56DED0-5D15-44B1-969F-47DF1F14CD85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

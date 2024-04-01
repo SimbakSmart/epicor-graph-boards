@@ -4,10 +4,83 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Epicor.App.UC"
+             xmlns:mv="clr-namespace:Epicor.App.ViewModels"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:ge="clr-namespace:SourceChord.GridExtra;assembly=GridExtra.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
 
-        <Label Content="QUEUE CONTROL" HorizontalAlignment="Center" VerticalAlignment="Center" />
-    </Grid>
+    <UserControl.DataContext>
+        <mv:QueuesViewModel />
+    </UserControl.DataContext>
+
+      <!--Transitioner-->
+    <materialDesign:Transitioner SelectedIndex="0" >
+
+        <!--Bar Graphs-->
+        <Grid Margin="10 2">
+
+            <!--<Grid.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="BorderBrush" Value="Black" />
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="Background" Value="LightGray" />
+                    <Setter Property="Height" Value="60" />
+                </Style>
+            </Grid.Resources>-->
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                 <!--Bar Grid Container-->
+                <ge:ResponsiveGrid>
+                    <Border ge:ResponsiveGrid.XS="12"  ge:ResponsiveGrid.SM="6" >
+
+                    </Border>
+                    <Border ge:ResponsiveGrid.XS="12"  ge:ResponsiveGrid.SM="6" >
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
+
+                             <DatePicker
+                              Width="140"
+                              materialDesign:HintAssist.HelperText="Helper text"
+                              materialDesign:HintAssist.Hint="Fecha Inicio"
+                              Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+
+                            <DatePicker
+                              Margin="5 0"
+                              Width="140"
+                              materialDesign:HintAssist.HelperText="Helper text"
+                              materialDesign:HintAssist.Hint="Fecha Final"
+                              Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+
+                            <Button  
+                                Height="50" 
+                                Margin="4 0"
+                                Style="{StaticResource  MaterialDesignFlatDarkBgButton}"
+                                Command="{Binding SendRequesByDateRangeCommand}">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Magnify" Height="25" Width="25" />
+                                    <TextBlock Text="Buscar"  Margin="4"/>
+                                </StackPanel>
+
+                            </Button>
+
+                            <Button  
+                                Height="50" 
+                                Margin="1 0"
+                                Style="{StaticResource  MaterialDesignFlatDarkBgButton}"
+                                Command="{Binding RefreshCommand}">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Autorenew" Height="25" Width="25" />
+                                    <TextBlock Text="Recargar"  Margin="4"/>
+                                </StackPanel>
+                            </Button>
+
+                        </StackPanel>
+                    </Border>
+                </ge:ResponsiveGrid>
+                <!--Bar Grid Container-->
+            </ScrollViewer>
+        </Grid>
+        <!--Bar Graphs-->
+    </materialDesign:Transitioner>
+    <!--Transitioner-->
 </UserControl>
