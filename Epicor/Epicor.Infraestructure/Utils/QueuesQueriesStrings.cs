@@ -29,5 +29,35 @@ namespace Epicor.Infraestructure.Utils
             WHERE YEAR(OpenDate) >= 2020 AND Closed = 0 AND OpenDate >= ? AND OpenDate <= ?) AS TotalOpen;
 
          ";
+
+        public static string TOTAL_OPEN_BY_QUEUES_RESPONSABLES = @"
+        SELECT
+        CASE
+        WHEN Q.Name IS NULL THEN 'Asignadas a sistemas'
+        ELSE
+        REPLACE(Q.Name,'_',' ')
+        END AS [Queue],
+        COUNT(*) AS Total
+        FROM SupportCall AS SC
+        LEFT JOIN Queue AS Q  ON Q.QueueID = SC.AssignToQueueID
+        WHERE Closed =0 AND YEAR(OpenDate) >= 2020
+        GROUP BY  Q.Name ORDER BY TOTAL DESC
+        ";
+
+        public static string TOTAL_OPEN_BY_QUEUES_RESPONSABLES_WITH_FILTERS = @"
+        SELECT
+        CASE
+        WHEN Q.Name IS NULL THEN 'Asignadas a sistemas'
+        ELSE
+        REPLACE(Q.Name,'_',' ')
+        END AS [Queue],
+        COUNT(*) AS Total
+        FROM SupportCall AS SC
+        LEFT JOIN Queue AS Q  ON Q.QueueID = SC.AssignToQueueID
+        WHERE Closed =0 AND YEAR(OpenDate) >= 2020 AND OpenDate >= ? AND OpenDate <= ?
+        GROUP BY  Q.Name ORDER BY TOTAL DESC
+        ";
+
+
     }
 }

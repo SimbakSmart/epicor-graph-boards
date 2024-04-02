@@ -8,6 +8,7 @@
              xmlns:errors="clr-namespace:Epicor.App.Validations"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:ge="clr-namespace:SourceChord.GridExtra;assembly=GridExtra.Wpf" xmlns:error1="clr-namespace:Epicor.App.Validations"
+             xmlns:gd="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -33,76 +34,93 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                  <!--Bar Grid Container-->
                 <ge:ResponsiveGrid>
+                      
+                    <!--Totals Cards-->
                     <Border ge:ResponsiveGrid.XS="12"  ge:ResponsiveGrid.SM="6" >
 
+                        <!--Totals Cards-->
+                        <StackPanel Orientation="Horizontal">
+                   
+                             <!--Gran Total-->
+                            <materialDesign:Card                      
+                           materialDesign:ElevationAssist.Elevation="Dp3"
+                           Width="150"
+                           Height="60"
+                           Background="{DynamicResource PrimaryHueDarkBrush}"
+                           Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                           UniformCornerRadius="6">
+
+                           <StackPanel HorizontalAlignment="Center" Margin="5">
+                            <TextBlock HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center"
+                                Style="{StaticResource TitleTotalsTexBlock}"
+                                Text="TOTAL DE REGISTROS" />
+
+                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                     Padding="0 2"
+                     Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                     Text="{Binding GranTotal,Mode=TwoWay}" />
+                                </StackPanel>
+                            </materialDesign:Card>
+                            <!--Gran Total-->
+
+                            <!--Total Cerrados-->
+                            <materialDesign:Card                      
+                              materialDesign:ElevationAssist.Elevation="Dp3"
+                              Margin="6 0"
+                              Width="150"
+                              Height="60"
+                              Background="{DynamicResource PrimaryHueDarkBrush}"
+                              Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                              UniformCornerRadius="6">
+
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <TextBlock HorizontalAlignment="Center" 
+                                      VerticalAlignment="Center"
+                               Style="{StaticResource TitleTotalsTexBlock}"
+                               Text="TOTAL CERRADOS" />
+
+                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Padding="0 2"
+                               Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                Text="{Binding TotalClosed,Mode=TwoWay}" />
+                                </StackPanel>
+                            </materialDesign:Card>
+                            <!--Total Cerrados-->
+
+                            <!--Total Activos-->
+                            <materialDesign:Card                      
+                               materialDesign:ElevationAssist.Elevation="Dp3"
+                               Margin="6 0"
+                               Width="150"
+                               Height="60"
+                               Background="{DynamicResource PrimaryHueDarkBrush}"
+                               Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                               UniformCornerRadius="6">
+
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <TextBlock HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center"
+                                Style="{StaticResource TitleTotalsTexBlock}"
+                                Text="TOTAL ACTIVOS" />
+
+                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                     Padding="0 2"
+                                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                     Text="{Binding TotalOpen,Mode=TwoWay}" />  
+                                </StackPanel>
+                            </materialDesign:Card>
+                            <!--Total Activos-->
+
+
+                        </StackPanel>
+                        <!--Totals Cards-->
                     </Border>
+                    <!--Totals Cards-->
+
+                    <!--Date Pickers-->
                     <Border ge:ResponsiveGrid.XS="12"  ge:ResponsiveGrid.SM="6" >
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
-
-                             <!--<DatePicker
-                              Width="140"
-                              materialDesign:HintAssist.HelperText="Helper text"
-                              materialDesign:HintAssist.Hint="Fecha Inicio"
-                              Style="{StaticResource MaterialDesignOutlinedDatePicker}" />-->
-
-                            <!--<DatePicker
-  x:Name="FutureDatePicker"
-  Width="100"
-  materialDesign:CalendarAssist.IsHeaderVisible="False"
-  materialDesign:HintAssist.Hint="Future Date">
-                                <DatePicker.SelectedDate>
-                                    <Binding
-      Path="FutureValidatingDate"
-      UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <domain:FutureDateValidationRule
-          ValidatesOnTargetUpdated="True" xmlns:domain="clr-namespace:MaterialDesignDemo.Domain" />
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </DatePicker.SelectedDate>
-                            </DatePicker>-->
-
-                                 <!--<DatePicker
-                                  x:Name="FutureDatePicker"
-                                  Width="100"
-                                    materialDesign:CalendarAssist.IsHeaderVisible="False"
-                                    materialDesign:HintAssist.Hint="Future Date">
-                                <DatePicker.SelectedDate>
-                                    <Binding
-                                    Path="DateValidationRules"
-                                    UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <error:DateValidationRules ValidatesOnTargetUpdated="True"/>
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </DatePicker.SelectedDate>
-                                 </DatePicker>-->
-
-                            <!--<Binding.ValidationRules>
-                                <errorvalidation:TextBoxNotEmptyValidationRule 
-         x:Name="UserNameValidation" ValidatesOnTargetUpdated="True" 
-         Message="Campo requerido"/>
-
-                            </Binding.ValidationRules>-->
-
-                            <!--<DatePicker
-                                  x:Name="FutureDatePicker"
-                                  Width="100"
-                                    materialDesign:CalendarAssist.IsHeaderVisible="False"
-                                    materialDesign:HintAssist.Hint="Future Date">
-                                  <DatePicker.SelectedDate>
-                                    <Binding
-                                    Path="DateValidationRulesX"
-                                    UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <errors:DateValidationRules 
-                                                ValidatesOnTargetUpdated="True"
-                                                Message="Este campo es requerido" />
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </DatePicker.SelectedDate>
-                            </DatePicker>-->
-
                             <DatePicker
                              SelectedDate="{Binding StartDate}"
                               Width="140"
@@ -123,7 +141,7 @@
                                 Margin="4 0"
                                 IsEnabled="{Binding IsActive}"
                                 Style="{StaticResource  MaterialDesignFlatDarkBgButton}"
-                                Command="{Binding SendRequesByDateRangeCommand}">
+                                Command="{Binding SendFiltersCommand}">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Magnify" Height="25" Width="25" />
                                     <TextBlock Text="Buscar"  Margin="4"/>
@@ -145,9 +163,83 @@
 
                         </StackPanel>
                     </Border>
+                    <!--Date Pickers-->
+
+                    <Border ge:ResponsiveGrid.XS="12"  ge:ResponsiveGrid.SM="12" Margin="0 10" >
+                        <Button  
+                              HorizontalAlignment="Right"
+                              Height="50" 
+                            Width="150"
+                             
+                              Style="{StaticResource  MaterialDesignFlatDarkBgButton}"
+                              Command="{x:Static materialDesign:Transitioner.MoveNextCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="ChartPie" Height="25" Width="25" />
+                                <TextBlock Text="Otras Graficas"  Margin="4"/>
+                            </StackPanel>
+
+                        </Button>
+                    </Border>
+                            
+                    
+                     <!--Bar Graphs-->
+                    <Border ge:ResponsiveGrid.XS="12"  ge:ResponsiveGrid.SM="12" 
+                            Height="440" Margin="5 20" >
+                        <materialDesign:Card  
+                            materialDesign:ElevationAssist.Elevation="Dp3">
+                            <Grid>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock 
+                                       Grid.Row="0"
+                                       HorizontalAlignment="Center" 
+                                       Style="{StaticResource TitleLargeTextBlock}"
+                                       Text="TOTAL ACTIVOS POR ÁREAS" />
+
+                                <gd:CartesianChart 
+                                    Grid.Row="1"
+                                    Series="{Binding SeriesBar}"
+                                    XAxes="{Binding XAxesBar}"
+                                    />
+                            </Grid>
+                        </materialDesign:Card>
+                    </Border>
+                    <!--Bar Graphs-->
+
                 </ge:ResponsiveGrid>
                 <!--Bar Grid Container-->
             </ScrollViewer>
+
+
+            <!--LOADING-->
+          
+            <materialDesign:Card Background="{StaticResource BackgroundModalColorBrush}"   
+                             Opacity="0.8"
+                        Visibility="{Binding IsLoading,Mode=TwoWay,Converter={StaticResource BooleanToVisibilityConverter}}">
+
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+
+                    <ProgressBar
+                     Margin="0 100 0 0"
+                    IsIndeterminate="True"
+                    Width="50"
+                    Height="50"
+                    Style="{StaticResource MaterialDesignCircularProgressBar}"
+                    Value="50" />
+                    <TextBlock Text="Cargando..."
+                      Style="{StaticResource TitleLargeTextBlock}"
+                      Foreground="{StaticResource LightColorBrush}" />
+                </StackPanel>
+
+            </materialDesign:Card>
+            <!--LOADING-->
+
+
+
         </Grid>
         <!--Bar Graphs-->
     </materialDesign:Transitioner>

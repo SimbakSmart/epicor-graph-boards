@@ -5,6 +5,7 @@
 
     <!--Font Files-->
     <FontFamily x:Key="AntonRegular">pack://appliction;,,,/Fonts/#Anton Regular</FontFamily>
+    <FontFamily x:Key="RobotoRegular">pack://appliction;,,,/Fonts/#Roboto Regular</FontFamily>
     <FontFamily x:Key="ArchivoBlackRegular">pack://appliction;,,,/Fonts/#ArchivoBlack Regular</FontFamily>
 
 
@@ -19,6 +20,18 @@
     <Style TargetType="{x:Type TextBlock}" x:Key="TitleExtraLargeTextBlock">
         <Setter Property="FontFamily" Value="{StaticResource AntonRegular}" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeExtraLarge}" />
+    </Style>
+
+    <!--TitleTextLarge-->
+    <Style TargetType="{x:Type TextBlock}" x:Key="TitleLargeTextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource AntonRegular}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
+    </Style>
+
+    <!--TitleTextRegular-->
+    <Style TargetType="{x:Type TextBlock}" x:Key="TitleTotalsTexBlock">
+        <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}" />
     </Style>
 
 

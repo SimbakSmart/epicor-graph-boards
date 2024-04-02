@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="Fonts\Anton-Regular.ttf" />
     <None Remove="Fonts\ArchivoBlack-Regular.ttf" />
+    <None Remove="Fonts\Roboto-Regular.ttf" />
     <None Remove="Images\my_logo.png" />
   </ItemGroup>
 
@@ -33,6 +34,7 @@
     <Resource Include="Fonts\ArchivoBlack-Regular.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Fonts\Roboto-Regular.ttf" />
     <Resource Include="Images\my_logo.png" />
   </ItemGroup>
 
