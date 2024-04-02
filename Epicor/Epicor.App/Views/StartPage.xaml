@@ -7,7 +7,10 @@
         xmlns:local="clr-namespace:Epicor.App.Views"
         xmlns:vm="clr-namespace:Epicor.App.ViewModels"
         mc:Ignorable="d"
-        Title="StartPage" Height="450" Width="800">
+        Title="StartPage" 
+        Height="450" 
+        Width="800"
+        MinWidth="600">
 
 
     <Window.DataContext>

@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Epicor.App.UC"
              xmlns:mv="clr-namespace:Epicor.App.ViewModels"
+             xmlns:errors="clr-namespace:Epicor.App.Validations"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:ge="clr-namespace:SourceChord.GridExtra;assembly=GridExtra.Wpf"
+             xmlns:ge="clr-namespace:SourceChord.GridExtra;assembly=GridExtra.Wpf" xmlns:error1="clr-namespace:Epicor.App.Validations"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -38,22 +39,89 @@
                     <Border ge:ResponsiveGrid.XS="12"  ge:ResponsiveGrid.SM="6" >
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
 
-                             <DatePicker
+                             <!--<DatePicker
                               Width="140"
                               materialDesign:HintAssist.HelperText="Helper text"
                               materialDesign:HintAssist.Hint="Fecha Inicio"
+                              Style="{StaticResource MaterialDesignOutlinedDatePicker}" />-->
+
+                            <!--<DatePicker
+  x:Name="FutureDatePicker"
+  Width="100"
+  materialDesign:CalendarAssist.IsHeaderVisible="False"
+  materialDesign:HintAssist.Hint="Future Date">
+                                <DatePicker.SelectedDate>
+                                    <Binding
+      Path="FutureValidatingDate"
+      UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <domain:FutureDateValidationRule
+          ValidatesOnTargetUpdated="True" xmlns:domain="clr-namespace:MaterialDesignDemo.Domain" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </DatePicker.SelectedDate>
+                            </DatePicker>-->
+
+                                 <!--<DatePicker
+                                  x:Name="FutureDatePicker"
+                                  Width="100"
+                                    materialDesign:CalendarAssist.IsHeaderVisible="False"
+                                    materialDesign:HintAssist.Hint="Future Date">
+                                <DatePicker.SelectedDate>
+                                    <Binding
+                                    Path="DateValidationRules"
+                                    UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <error:DateValidationRules ValidatesOnTargetUpdated="True"/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </DatePicker.SelectedDate>
+                                 </DatePicker>-->
+
+                            <!--<Binding.ValidationRules>
+                                <errorvalidation:TextBoxNotEmptyValidationRule 
+         x:Name="UserNameValidation" ValidatesOnTargetUpdated="True" 
+         Message="Campo requerido"/>
+
+                            </Binding.ValidationRules>-->
+
+                            <!--<DatePicker
+                                  x:Name="FutureDatePicker"
+                                  Width="100"
+                                    materialDesign:CalendarAssist.IsHeaderVisible="False"
+                                    materialDesign:HintAssist.Hint="Future Date">
+                                  <DatePicker.SelectedDate>
+                                    <Binding
+                                    Path="DateValidationRulesX"
+                                    UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <errors:DateValidationRules 
+                                                ValidatesOnTargetUpdated="True"
+                                                Message="Este campo es requerido" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </DatePicker.SelectedDate>
+                            </DatePicker>-->
+
+                            <DatePicker
+                             SelectedDate="{Binding StartDate}"
+                              Width="140"
+                              materialDesign:HintAssist.HelperText="{Binding StarDateMessage}"
+                              materialDesign:HintAssist.Hint="Fecha Final"
                               Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
 
                             <DatePicker
+                              SelectedDate="{Binding EndDate}"
                               Margin="5 0"
                               Width="140"
-                              materialDesign:HintAssist.HelperText="Helper text"
+                              materialDesign:HintAssist.HelperText="{Binding EndDateMessage}"
                               materialDesign:HintAssist.Hint="Fecha Final"
                               Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
 
                             <Button  
                                 Height="50" 
                                 Margin="4 0"
+                                IsEnabled="{Binding IsActive}"
                                 Style="{StaticResource  MaterialDesignFlatDarkBgButton}"
                                 Command="{Binding SendRequesByDateRangeCommand}">
                                 <StackPanel Orientation="Horizontal">
@@ -66,6 +134,7 @@
                             <Button  
                                 Height="50" 
                                 Margin="1 0"
+                                IsEnabled="{Binding IsActive}"
                                 Style="{StaticResource  MaterialDesignFlatDarkBgButton}"
                                 Command="{Binding RefreshCommand}">
                                 <StackPanel Orientation="Horizontal">
