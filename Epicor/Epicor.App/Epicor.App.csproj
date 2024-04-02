@@ -6,6 +6,7 @@
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Images\my_icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +14,10 @@
     <None Remove="Fonts\ArchivoBlack-Regular.ttf" />
     <None Remove="Fonts\Roboto-Regular.ttf" />
     <None Remove="Images\my_logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\my_icon.ico" />
   </ItemGroup>
 
   <ItemGroup>

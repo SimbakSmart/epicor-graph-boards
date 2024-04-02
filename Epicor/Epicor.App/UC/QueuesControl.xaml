@@ -165,7 +165,7 @@
                     </Border>
                     <!--Date Pickers-->
 
-                    <Border ge:ResponsiveGrid.XS="12"  ge:ResponsiveGrid.SM="12" Margin="0 10" >
+                    <Border ge:ResponsiveGrid.XS="12"  ge:ResponsiveGrid.SM="12" Margin="5 10" >
                         <Button  
                               HorizontalAlignment="Right"
                               Height="50" 
@@ -210,6 +210,66 @@
                     </Border>
                     <!--Bar Graphs-->
 
+                      <!--Table Rango--> 
+                    <Border ge:ResponsiveGrid.XS="12" ge:ResponsiveGrid.SM="6" Margin="5" >
+
+                        <materialDesign:Card  
+                            materialDesign:ElevationAssist.Elevation="Dp3">
+                            <StackPanel>
+
+
+                                <TextBlock 
+                                       Grid.Row="0"
+                                       HorizontalAlignment="Center" 
+                                       Style="{StaticResource TitleLargeTextBlock}"
+                                       Text="RANGO POR DÍAS" />
+                                <DataGrid
+                              Margin="7"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            HeadersVisibility="All"
+                            ItemsSource="{Binding ListByRange}">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Queue" Binding="{Binding Name}" />
+                                        <DataGridTextColumn Header="0-2 Días" Binding="{Binding RangeOne}" />
+                                        <DataGridTextColumn Header="3-7 Días" Binding="{Binding RangeTwo}" />
+                                        <DataGridTextColumn Header="8-15 Días" Binding="{Binding RangeThree}" />
+                                        <DataGridTextColumn Header="16-20 Días" Binding="{Binding RangeFour}" />
+                                        <DataGridTextColumn Header="Mayor a 21 Días" Binding="{Binding RangeFive}" />
+                                        <DataGridTextColumn Header="Gran Total" Binding="{Binding Total}" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                        </materialDesign:Card>
+                    </Border>
+                    <!--Table Rango-->
+
+                    <!--Graph Estatus-->
+                    <Border ge:ResponsiveGrid.XS="12" ge:ResponsiveGrid.SM="6" Margin="5"  >
+                        <materialDesign:Card  
+                              materialDesign:ElevationAssist.Elevation="Dp3">
+                            <Grid>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock 
+                                    Grid.Row="0"
+                                    HorizontalAlignment="Center" 
+                                    Style="{StaticResource TitleLargeTextBlock}"
+                                    Text="TOTAL POR ESTATUS" />
+
+                                <gd:CartesianChart 
+                                       
+                                     Grid.Row="1"
+                                     Series="{Binding SeriesStatus}"
+                                     XAxes="{Binding XAxesStatus}"
+                                     />
+                            </Grid>
+                        </materialDesign:Card>
+                    </Border>
                 </ge:ResponsiveGrid>
                 <!--Bar Grid Container-->
             </ScrollViewer>

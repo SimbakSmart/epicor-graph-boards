@@ -33,6 +33,7 @@ namespace Epicor.App.ViewModels
         [NotifyCanExecuteChangedFor(nameof(SendFiltersCommand))]
         private bool _isLoading;
 
+        #region FILTERS 
         private DateTime? _startDate;
         private DateTime? _endDate;
         public DateTime? StartDate
@@ -79,8 +80,10 @@ namespace Epicor.App.ViewModels
                     EndDateMessage = "La fecha final es requerida";
                 }
             }
-        }
+        } 
+        #endregion
 
+        #region TOTALES 
         [ObservableProperty]
         private List<Queues> _total;
 
@@ -91,9 +94,10 @@ namespace Epicor.App.ViewModels
         private int _totalOpen;
 
         [ObservableProperty]
-        private int _totalClosed;
+        private int _totalClosed; 
+        #endregion
 
-        #region GRAPH RESPONSALES
+        #region BAR GRAPH RESPONSALES 
         [ObservableProperty]
         private ColumnSeries<double> _userSeriesBar;
 
@@ -105,6 +109,25 @@ namespace Epicor.App.ViewModels
 
         [ObservableProperty]
         public Axis[] _xAxesBar;
+        #endregion
+
+        #region  TABLE RANGE DAYS 
+        [ObservableProperty]
+        private List<Queues> _listByRange;
+        #endregion
+
+        #region GRAPH STATUS        
+        [ObservableProperty]
+        private ColumnSeries<double> _userSeriesStatus;
+
+        [ObservableProperty]
+        private List<Queues> _listStatus = null;
+
+        [ObservableProperty]
+        public ISeries[] _seriesStatus;
+
+        [ObservableProperty]
+        public Axis[] _xAxesStatus;
         #endregion
 
         public QueuesViewModel()
@@ -123,6 +146,9 @@ namespace Epicor.App.ViewModels
             IsLoading = true;
             await GetTotalsAsync();
             await BarGraphByResponsableAsync();
+            await GetTotalsByRangeAsync();
+            await BarGraphBySatusAsync();
+            await qs.DisposeAsync();
             IsLoading = false;
         }
 
@@ -181,6 +207,59 @@ namespace Epicor.App.ViewModels
             XAxesBar = new Axis[] { _axis };
         }
 
+        private async Task GetTotalsByRangeAsync(FiltersParams filters = null)
+        {
+            if (filters != null)
+            {
+                ListByRange = await qs.GetTotalsByRangeDayseAsync(filters);
+            }
+            else
+            {
+                ListByRange = await qs.GetTotalsByRangeDayseAsync();
+            }
+
+        }
+
+        private async Task BarGraphBySatusAsync(FiltersParams filters = null)
+        {
+            ListStatus?.Clear();
+            if (filters != null)
+            {
+                ListStatus = await qs.GetTotalsByStatuseAsync(filters);
+            }
+            else
+            {
+                ListStatus = await qs.GetTotalsByStatuseAsync();
+            }
+
+
+            UserSeriesStatus = new ColumnSeries<double>()
+            {
+                Name = "Reportes Activos",
+                Values = ListStatus.Select(q => (double)q.Total).ToList(),
+                Padding = 1,
+                MaxBarWidth = double.PositiveInfinity,
+                // Fill = new SolidColorPaint(new SKColor(235, 95, 2, 255)),
+                Fill = new SolidColorPaint(new SKColor(25, 118, 210, 255)),
+            };
+
+
+            Axis _axis = new Axis()
+            {
+                Labels = ListStatus.Select(q => q.Status).ToList(),
+                TextSize = 12,
+                LabelsAlignment = LiveChartsCore.Drawing.Align.Start,
+                IsVisible = true,
+                LabelsRotation = -90,
+                Position = AxisPosition.Start,
+                Padding = new LiveChartsCore.Drawing.Padding(0)
+            };
+
+            SeriesStatus = new ISeries[] { UserSeriesStatus };
+            XAxesStatus = new Axis[] { _axis };
+
+        }
+
         [RelayCommand]
         private async Task SendFiltersAsync()
         {
@@ -197,6 +276,8 @@ namespace Epicor.App.ViewModels
 
                     await GetTotalsAsync(filters);
                     await BarGraphByResponsableAsync(filters);
+                    await GetTotalsByRangeAsync(filters);
+                    await BarGraphBySatusAsync(filters);
                 }
             }
             catch
