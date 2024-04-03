@@ -52,6 +52,7 @@ namespace Epicor.App.ViewModels
             set { SetProperty(ref _selectedUserControl, value); }
         }
 
+        
         public StartViewModel()
         {
 
@@ -64,6 +65,13 @@ namespace Epicor.App.ViewModels
             SelectedItem = MenuOptions[0];
 
             IsOpen = false;
+            //Task.Run(async () => await GetServerDataAsync());
+        }
+
+         private async Task GetServerDataAsync()
+        {
+            var queues = QueuesViewModel.GetIntance();
+                       await queues.LoadDataAsync();
         }
 
 

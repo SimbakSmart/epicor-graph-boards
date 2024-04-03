@@ -10,6 +10,7 @@ using LiveChartsCore;
 using LiveChartsCore.Measure;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
+using LiveChartsCore.SkiaSharpView.Extensions;
 
 
 namespace Epicor.App.ViewModels
@@ -130,8 +131,18 @@ namespace Epicor.App.ViewModels
         public Axis[] _xAxesStatus;
         #endregion
 
+        #region PIE GRAPH URGENCY   
+        [ObservableProperty]
+        private List<Queues> _listUrgency = null;
+
+        [ObservableProperty]
+        private IEnumerable<ISeries> _seriesUrgency; 
+        #endregion
+
+        public static QueuesViewModel instance = null;
         public QueuesViewModel()
         {
+            instance = this;
             IsActive = false;
             IsLoading =false;
             StarDateMessage = "La fecha inicio es requerida";
@@ -139,8 +150,17 @@ namespace Epicor.App.ViewModels
             qs = new QueueServices();
             Task.Run(async () => await LoadDataAsync());
         }
+
+        public static QueuesViewModel GetIntance()
+        {
+            if(instance == null)   
+               return new QueuesViewModel();
+
+            return instance;
+
+        }
    
-        private async Task LoadDataAsync()
+        public  async Task LoadDataAsync()
         {
             qs = new QueueServices();
             IsLoading = true;
@@ -148,6 +168,7 @@ namespace Epicor.App.ViewModels
             await BarGraphByResponsableAsync();
             await GetTotalsByRangeAsync();
             await BarGraphBySatusAsync();
+            await UrgencyPieChartAsync();
             await qs.DisposeAsync();
             IsLoading = false;
         }
@@ -259,6 +280,25 @@ namespace Epicor.App.ViewModels
             XAxesStatus = new Axis[] { _axis };
 
         }
+
+        private async Task UrgencyPieChartAsync()
+        {
+            int _index = 0;
+            ListUrgency = await qs.GetTotalsByUrgencyAsync();
+            string[] _urgencyArray = ListUrgency.Select(q => q.Urgency).ToArray();
+            double[] _totalUrgencyArray = ListUrgency.Select(q => (double)q.Total).ToArray();
+
+            SeriesUrgency = _totalUrgencyArray.AsPieSeries((value, series) =>
+            {
+                series.Name = _urgencyArray[_index++ % _urgencyArray.Length] + " " + value.ToString();
+                series.DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle;
+                series.DataLabelsSize = 20;
+                series.DataLabelsPaint = new SolidColorPaint(new SKColor(0, 0, 0));
+                series.Values = new List<double>() { value };
+
+            });
+        }
+
 
         [RelayCommand]
         private async Task SendFiltersAsync()

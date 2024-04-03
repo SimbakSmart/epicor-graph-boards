@@ -302,6 +302,58 @@
 
         </Grid>
         <!--Bar Graphs-->
+
+        <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight}">
+            <Grid Margin="10 2">
+                <StackPanel>
+                    <Button  
+                                        HorizontalAlignment="Right"
+                                       Height="50"
+                                        Width="130"
+                                       Margin="4"
+                                       Style="{StaticResource  MaterialDesignFlatDarkBgButton}"
+                                       Command="{x:Static materialDesign:Transitioner.MoveFirstCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ArrowLeftBoldCircle" Height="25" Width="25" />
+                            <TextBlock Text="Regresar"  Margin="4"/>
+                        </StackPanel>
+
+                    </Button>
+
+
+                    <materialDesign:Card  
+                                    Height="400"
+                                 Grid.Row="0" Grid.Column="0" Margin="4"
+                                 materialDesign:ElevationAssist.Elevation="Dp3">
+
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock 
+                                          Grid.Row="0"
+                                          HorizontalAlignment="Center" 
+                                          Style="{StaticResource TitleLargeTextBlock}"
+                                          Text="TOTAL POR URGENCIA" />
+
+                            <gd:PieChart
+                                           Grid.Row="1"                       
+                                           IsClockwise="False"
+                                           InitialRotation="-90"
+                                                  AnimationsSpeed="00:00:00.500"
+                                          Series="{Binding SeriesUrgency }"
+                                          LegendPosition="Bottom">
+                            </gd:PieChart>
+
+                        </Grid>
+                    </materialDesign:Card>
+
+                </StackPanel>
+            </Grid>
+        </materialDesign:TransitionerSlide>
     </materialDesign:Transitioner>
     <!--Transitioner-->
 </UserControl>

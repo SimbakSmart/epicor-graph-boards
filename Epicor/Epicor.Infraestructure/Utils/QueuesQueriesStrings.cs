@@ -116,6 +116,21 @@ namespace Epicor.Infraestructure.Utils
         GROUP BY Scs.Name
         ";
 
+        public static string TOTAL_OPEN_BY_URGENCY = @"            
+            SELECT 
+            CASE
+            WHEN U.Entry IS NULL THEN 'NO DEFINITOS'
+            ELSE
+             SUBSTRING(U.Entry, 4, LEN(U.Entry)) 
+            END
+            AS [Urgency],
+            COUNT(*) AS [Total]
+            FROM SupportCall AS Sc
+            LEFT JOIN [EpicorITSMApplication].[dbo].[ValueListEntry] AS U   ON U.ValueListEntryID = Sc.UrgencyID
+            WHERE YEAR(Sc.OpenDate) >=2020 AND Sc.Closed=0
+            GROUP BY U.Entry  ORDER BY Urgency DESC
+        ";
+
 
     }
 }
